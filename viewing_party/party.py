@@ -33,34 +33,23 @@ def add_to_watchlist(user_data, movie):
     return user_data
 
 
-janes_data = {
-    "watchlist": [{
-        "title": "MOVIE_TITLE_1",
-        "genre": "GENRE_1",
-        "rating": 4.5
-    }],
-    "watched": []
-}
 
 def watch_movie(user_data, title):
-    #Iterate through user_data dictionary by its keys
-    for _ in user_data["watchlist"]:
-        #If the title is in a movie in the user's watchlist
-        if title in user_data["watchlist"]:
-            print(f"THE MOVIE TITLE IS: ***** ",{title})
-            #add that movie to watched
-            #user_data["watched"].append(title)
-            
-            #remove that movie from the watchlist
-            user_data["watchlist"].remove(title)
+    watchlist = user_data["watchlist"]
+    watched_movies = user_data["watched"]
 
+    #print(watchlist[0]["title"])
+    for item in watchlist:
+        if item["title"] == title:
+            #Remove item of type dict from watchlist of type list
+            watchlist.remove(item)
+            watched_movies.append(item)
             return user_data
-        else:
-            return user_data
-        
+    
+    # If the title wasn't found, return the original data
+    return user_data
 
-result = watch_movie(janes_data, "MOVIE_TITLE_1")
-print(result)
+
 
 
 
