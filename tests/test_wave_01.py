@@ -151,6 +151,7 @@ def test_moves_movie_from_watchlist_to_empty_watched():
         }],
         "watched": []
     }
+    movie = janes_data["watchlist"][0]
 
     # Act
     updated_data = watch_movie(janes_data, MOVIE_TITLE_1)
@@ -160,15 +161,9 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     assert len(updated_data["watched"]) == 1
     
     #Assert that the correct movie was added to watched
-    assert janes_data["watchlist"] == updated_data["watched"]
-    #raise Exception("Test needs to be completed.")
-
+    assert updated_data["watched"][0] == movie
     
-    # *******************************************************************************************
-    # ****** Add assertions here to test that the correct movie was added to "watched" **********
-    # *******************************************************************************************
-
-@pytest.mark.skip()
+#@pytest.mark.skip()
 def test_moves_movie_from_watchlist_to_watched():
     # Arrange
     movie_to_watch = HORROR_1
@@ -187,7 +182,8 @@ def test_moves_movie_from_watchlist_to_watched():
     assert len(updated_data["watchlist"]) == 1
     assert len(updated_data["watched"]) == 2
     
-    raise Exception("Test needs to be completed.")
+    #Assert that the correct movie was added to watched
+    assert updated_data["watched"][1] == movie_to_watch
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
