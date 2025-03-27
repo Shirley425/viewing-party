@@ -50,6 +50,7 @@ def watch_movie(user_data, title):
 
 
 # ------------- WAVE 2 --------------------
+
 def get_watched_avg_rating(user_data):
     watched_movies = user_data["watched"]
     sum_rating = 0
@@ -98,10 +99,7 @@ def get_most_watched_genre(user_data):
     return most_watched_genre
 
 
-
-# -----------------------------------------
 # ------------- WAVE 3 --------------------
-# -----------------------------------------
 
 def get_unique_watched(user_data):
     user_watched_list = user_data["watched"]
@@ -145,11 +143,7 @@ def get_friends_unique_watched(user_data):
     
 
 
-# -----------------------------------------
 # ------------- WAVE 4 --------------------
-# -----------------------------------------
-# unique_movies = [{'genre': 'Fantasy', 'host': 'hulu', 'rating': 4.0, 'title': 'The Programmer: An Unexpected Stack Trace'}, 
-#  {'genre': 'Fantasy', 'host': 'hulu', 'rating': 4.0, 'title': 'The Programmer: An Unexpected Stack Trace'}]
 
 def get_available_recs(user_data):
     unique_movie = get_friends_unique_watched(user_data)
