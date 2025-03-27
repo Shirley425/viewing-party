@@ -98,79 +98,43 @@ def get_most_watched_genre(user_data):
     return most_watched_genre
 
 
-
-# -----------------------------------------
 # ------------- WAVE 3 --------------------
-# -----------------------------------------
-#How to get friend's dictionary? - Must access element from friends list, watched key from dict, and title key from dict.
-# Friends is a list of friends of watched dictionaries of movie dictionaries
-# Watched is a list of movie dictionaries
-
 def get_unique_watched(user_data):
-    #Get the user watched dictionaries
-    user_watched_movies = user_data["watched"]
-    #Get the friend watched dictionaries
-    friends = user_data["friends"]
+    user_watched_list = user_data["watched"]
+    friends_list = user_data["friends"]
     
-    friends_watched_movies = set()
-    #For every friend in list of friends:
-    for friend in friends:
-        #For every movie in watched dictionary:
-        for  movie in friend['watched']:
-            #Add movie title to a set
-            friends_watched_movies.add(movie["title"])
+    friends_watched_set = set()
+    unique_watched = []
 
-    only_user_watched = []
-    #For every movie in watched list:
-    for movie in user_watched_movies:
-        #--- Looking at dictionary now ----#
-        #Query if the title of the movie dict is not in the set of movie titles watched by friend
-        if movie["title"] not in friends_watched_movies:
-            #Add the dictionary to a list (of movies only watched by user)
-            only_user_watched.append(movie)
+    #Iterate through the movies in nested friends_list
+    for items in friends_list:
+        for movie in items["watched"]:  
+            if movie in user_watched_list:
+                friends_watched_set.add(movie["title"])
 
-    #Return list of dicts representing movies that only user has watched.
-    return only_user_watched
+    #Iterate through the movies in user_watched_list
+    for movie in user_watched_list:
+        if movie["title"] not in friends_watched_set:
+            unique_watched.append(movie)
+    return unique_watched
 
-# user_data = {
-    #     "watched": [
-    #         {
-    #             "title": MOVIE
-    #             "genre": FANTASY
-    #             "rating": 2.0
-    #         },
-    #         {
-    #             "title": MOVIE
-    #             "genre": COMEDY
-    #             "rating": 2.0
-    #         }
-    #     ]
-    #     "friends": [
-    #         {
-    #             "watched": [
-    #                 {       
-    #                 "title": MOVIE
-    #                 "genre": HORROR
-    #                 "rating": 2.0
-    #                 },
-    #                 {
-    #                 "title": MOVIE
-    #                 "genre": HORROR
-    #                 "rating": 2.0
-    #                 }
-    #             ]
+def get_friends_unique_watched(user_data):
+    user_watched_list = user_data["watched"]
+    friends_list = user_data["friends"]
+    
+    user_watched_set = set()
+    unique_watched = []
 
-    #         }
+    for movie in user_watched_list:
+        user_watched_set.add(movie["title"])
 
-    #     ]
+    for items in friends_list:
+        for movie in items["watched"]:  
+            if movie["title"] not in user_watched_set and movie not in user_watched_list:
+                unique_watched.append(movie)
+    return unique_watched
+    
 
-    # }
-
-
-#Put the diff from user's set and friend's set 
-
-#The movie that the user has watched but that the friend has not watched.
-        
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
