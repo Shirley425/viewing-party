@@ -135,11 +135,51 @@ def get_friends_unique_watched(user_data):
     return unique_watched
     
 
-# -----------------------------------------
 # ------------- WAVE 4 --------------------
-# -----------------------------------------
+# unique_movies = [{'genre': 'Fantasy', 'host': 'hulu', 'rating': 4.0, 'title': 'The Programmer: An Unexpected Stack Trace'}, 
+#  {'genre': 'Fantasy', 'host': 'hulu', 'rating': 4.0, 'title': 'The Programmer: An Unexpected Stack Trace'}]
 
-# -----------------------------------------
+def get_available_recs(user_data):
+    unique_movie = get_friends_unique_watched(user_data)
+    recommended_movies = []
+    
+    for movie in unique_movie:
+        if movie["host"] in user_data["subscriptions"]:
+            recommended_movies.append(movie)
+    return recommended_movies
+
 # ------------- WAVE 5 --------------------
-# -----------------------------------------
+def get_new_rec_by_genre(user_data):
+    unique_movie = get_friends_unique_watched(user_data)
+    user_watched_list = user_data["watched"]
+    genre_dict = {}
+    recommended_movies = []
 
+    for movie in user_watched_list:
+        if movie["genre"] not in genre_dict:
+            genre_dict[movie["genre"]] = 1
+        else:
+            genre_dict[movie["genre"]] += 1
+    
+    most_watched_genre = ""
+    most_count = 0
+    for genre, count in genre_dict.items():
+        if count > most_count:
+            most_count = count
+            most_watched_genre = genre
+
+    for movie in unique_movie:
+        if movie["genre"] == most_watched_genre:
+            recommended_movies.append(movie)
+
+    return recommended_movies
+
+def get_rec_from_favorites(user_data):
+    favorites_dict = user_data["favorites"]
+    unique_movie = get_unique_watched(user_data)
+    recommended_movies = []
+
+    for movie in favorites_dict:
+        if movie in unique_movie:
+            recommended_movies.append(movie)
+    return recommended_movies
