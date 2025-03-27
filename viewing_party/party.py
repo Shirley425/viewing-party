@@ -160,7 +160,10 @@ def get_available_recs(user_data):
             recommended_movies.append(movie)
     return recommended_movies
 
+
+# -----------------------------------------
 # ------------- WAVE 5 --------------------
+# -----------------------------------------
 def get_new_rec_by_genre(user_data):
     unique_movie = get_friends_unique_watched(user_data)
     user_watched_list = user_data["watched"]
@@ -185,7 +188,7 @@ def get_new_rec_by_genre(user_data):
             recommended_movies.append(movie)
 
     return recommended_movies
-
+# -----------------------------------------
 def get_rec_from_favorites(user_data):
     favorites_dict = user_data["favorites"]
     unique_movie = get_unique_watched(user_data)
