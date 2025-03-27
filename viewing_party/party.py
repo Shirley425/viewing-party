@@ -102,7 +102,74 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+#How to get friend's dictionary? - Must access element from friends list, watched key from dict, and title key from dict.
+# Friends is a list of friends of watched dictionaries of movie dictionaries
+# Watched is a list of movie dictionaries
 
+def get_unique_watched(user_data):
+    #Get the user watched dictionaries
+    user_watched_movies = user_data["watched"]
+    #Get the friend watched dictionaries
+    friends = user_data["friends"]
+    
+    friends_watched_movies = set()
+    #For every friend in list of friends:
+    for friend in friends:
+        #For every movie in watched dictionary:
+        for  movie in friend['watched']:
+            #Add movie title to a set
+            friends_watched_movies.add(movie["title"])
+
+    only_user_watched = []
+    #For every movie in watched list:
+    for movie in user_watched_movies:
+        #--- Looking at dictionary now ----#
+        #Query if the title of the movie dict is not in the set of movie titles watched by friend
+        if movie["title"] not in friends_watched_movies:
+            #Add the dictionary to a list (of movies only watched by user)
+            only_user_watched.append(movie)
+
+    #Return list of dicts representing movies that only user has watched.
+    return only_user_watched
+
+# user_data = {
+    #     "watched": [
+    #         {
+    #             "title": MOVIE
+    #             "genre": FANTASY
+    #             "rating": 2.0
+    #         },
+    #         {
+    #             "title": MOVIE
+    #             "genre": COMEDY
+    #             "rating": 2.0
+    #         }
+    #     ]
+    #     "friends": [
+    #         {
+    #             "watched": [
+    #                 {       
+    #                 "title": MOVIE
+    #                 "genre": HORROR
+    #                 "rating": 2.0
+    #                 },
+    #                 {
+    #                 "title": MOVIE
+    #                 "genre": HORROR
+    #                 "rating": 2.0
+    #                 }
+    #             ]
+
+    #         }
+
+    #     ]
+
+    # }
+
+
+#Put the diff from user's set and friend's set 
+
+#The movie that the user has watched but that the friend has not watched.
         
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
