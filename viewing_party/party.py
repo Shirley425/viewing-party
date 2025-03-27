@@ -98,7 +98,11 @@ def get_most_watched_genre(user_data):
     return most_watched_genre
 
 
+
+# -----------------------------------------
 # ------------- WAVE 3 --------------------
+# -----------------------------------------
+
 def get_unique_watched(user_data):
     user_watched_list = user_data["watched"]
     friends_list = user_data["friends"]
@@ -125,17 +129,25 @@ def get_friends_unique_watched(user_data):
     user_watched_set = set()
     unique_watched = []
 
+    #Get set of movie titles watched by user
     for movie in user_watched_list:
         user_watched_set.add(movie["title"])
 
-    for items in friends_list:
-        for movie in items["watched"]:  
-            if movie["title"] not in user_watched_set and movie not in user_watched_list:
-                unique_watched.append(movie)
+    #Iterate through each friend in friends_list
+    for friend in friends_list:
+        #For every movie dict in friend dict
+        for movie in friend["watched"]: 
+            #If title is not in user_watched_set AND title is not in unique_watched_set:
+            if movie["title"] not in user_watched_set:
+                if movie not in unique_watched:
+                    unique_watched.append(movie)
     return unique_watched
     
 
+
+# -----------------------------------------
 # ------------- WAVE 4 --------------------
+# -----------------------------------------
 # unique_movies = [{'genre': 'Fantasy', 'host': 'hulu', 'rating': 4.0, 'title': 'The Programmer: An Unexpected Stack Trace'}, 
 #  {'genre': 'Fantasy', 'host': 'hulu', 'rating': 4.0, 'title': 'The Programmer: An Unexpected Stack Trace'}]
 
