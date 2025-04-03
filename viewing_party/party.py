@@ -16,13 +16,9 @@ def create_movie(title, genre, rating):
         return None
 
 def add_to_watched(user_data, movie):
-    #Check if "watched" key exists:
-    if "watched" not in user_data:
-        #Set the "watched" key to the list of watched movies as a value
-        user_data["watched"] = []  
-    #Add movie to the watched list
     user_data["watched"].append(movie)
     return user_data
+
 
 def add_to_watchlist(user_data, movie):
     #Add movie to watchlist inside of user_data
