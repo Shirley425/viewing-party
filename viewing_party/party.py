@@ -21,12 +21,9 @@ def add_to_watched(user_data, movie):
 
 
 def add_to_watchlist(user_data, movie):
-    #Add movie to watchlist inside of user_data
-    if "watchlist" not in user_data:
-        user_data["watchlist"] = movie
-
     user_data["watchlist"].append(movie)
     return user_data
+
 
 def watch_movie(user_data, title):
     watchlist = user_data["watchlist"]
