@@ -55,7 +55,8 @@ def get_watched_avg_rating(user_data):
             count += 1
     # Access the rating key in that dict
     # Sum every rating and calculate average
-    average_rating = sum_rating/count
+    average_rating = sum_rating / count
+
     return average_rating
 
 def get_most_watched_genre(user_data):
